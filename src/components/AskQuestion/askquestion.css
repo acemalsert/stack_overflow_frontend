@@ -1,0 +1,23 @@
+.input-box{
+    width: 40rem;
+    height: 2rem;
+}
+
+.input-box-body{
+    width: 40rem;
+    height: 20rem;
+}
+
+.ask-button{
+    
+    margin-right: 0%;
+    margin-top: 30px;
+    background-color: #378ad3;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.ask-question{
+    background-color: rgb(48, 46, 46);
+}

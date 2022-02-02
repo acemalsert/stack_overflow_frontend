@@ -1,0 +1,50 @@
+.header {
+ background-color: #393939;
+ box-shadow: 0 3px 3px rgba(0,0,0,.2);
+ grid-column-gap:20px ;
+ display: grid;
+ 
+
+}
+.nav{
+ display: grid;
+ grid-template-columns: 200px 1fr 200px;
+ 
+ 
+ 
+}
+
+.logo {
+    color: #ffff;
+    background-color: #393939;
+    text-decoration: none;
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    padding: 10 15px;
+    margin-left: 10px;
+    
+}
+.search-box{
+    width: 100%;
+    background: rgba(0,0,0,.1);
+    border:1px solid #777;
+    padding: 10px 10px;
+    margin-top: 7px;
+    border-radius: 3px;
+    display: inline-block;
+    box-sizing: border-box;
+    margin-bottom: 7px;
+    color:white;
+}
+
+.profile{
+    color: #fff;
+    text-decoration: none;
+    line-height:50px ;
+    margin-left: 10px;
+
+}
+
+
+   
