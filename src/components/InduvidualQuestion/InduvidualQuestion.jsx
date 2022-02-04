@@ -28,7 +28,7 @@ function InduvidualQuestion() {
               
               <div className='row mt-3 pl-4  '>
             <form>
-                <input className='input-box-body' type="text">
+                <input className='input-box-body bg-dark' type="text">
                 </input>
             </form>  
             </div>

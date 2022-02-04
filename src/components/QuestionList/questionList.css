@@ -32,3 +32,54 @@
     background-color: rgb(48, 46, 46);
 }
 
+.header {
+    background-color: #393939;
+    box-shadow: 0 3px 3px rgba(0,0,0,.2);
+    
+    
+    
+   
+   }
+ 
+
+
+   
+   .logo {
+    color: #ffff;
+   
+    text-decoration: none;
+    height: 50px;
+    line-height: 50px;
+    padding: 15px;
+    margin-left: 10px;
+    font-size: x-large;
+       
+      
+      
+       
+   }
+
+   .navbar-section{
+
+    background-color: #393939;
+   }
+   
+   
+    
+
+    .search-box{
+        width: 100%;
+        background: rgba(0,0,0,.1);
+        border:1px solid #777;
+        padding: 10px 10px;
+        margin-top: 7px;
+        border-radius: 3px;
+       
+        box-sizing: border-box;
+        margin-bottom: 7px;
+        color:white;
+    }
+   
+    
+   
+

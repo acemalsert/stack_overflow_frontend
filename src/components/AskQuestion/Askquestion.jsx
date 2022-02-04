@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "./askquestion.css"
 
 function Askquestion() {
+
+  const [title,setTitle] = useState([])
   return <div className='ask-question bg-dark'>
       <div className='container bg-dark pt-3 '>
         
