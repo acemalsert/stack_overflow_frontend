@@ -8,6 +8,7 @@ import {
   Switch,
   Route,Redirect
 } from "react-router-dom";
+import InduvidualQuestion from './components/InduvidualQuestion/InduvidualQuestion';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
   
      
     <div className="App">
-    <Header/>
+   
     <Switch>
 
 <Route path="/topQuestions">
@@ -25,7 +26,10 @@ function App() {
     <Route path="/askQuestions">
     <Askquestion/>
     </Route>
-     
+
+    <Route exact path="/question">
+      <InduvidualQuestion/>
+      </Route>     
      
      
      <Redirect to="/topQuestions "/>
