@@ -16,9 +16,9 @@ function QuestionList(props) {
            {/*Navbar Start */}
      
        <div className="col-2 ">
-       <a href = "" className = "logo "> <Link className='link' to= "/topQuestions"><i class="fab fa-stack-overflow"></i>Stack <b>overflow</b></Link></a>
+       <a className = "logo "> <Link className='link' to= "/topQuestions"><i class="fab fa-stack-overflow"></i>Stack <b>overflow</b></Link></a>
        </div>
-         <div className="col-10 "> <form action ="" className='search'>
+         <div className="col-8  mr-2"> <form action ="" className='search'>
               <input className = "search-box" type  = "text" placeholder='Search...' onChange={(event) => {setSearchTerm(event.target.value)}}/>
           </form></div>
          
@@ -38,7 +38,7 @@ function QuestionList(props) {
           </div>
 
           <div className="col-6">
-            <button className="ask-button"><Link to="/askQuestions">Ask Questions</Link></button>
+            <button className="ask-button"><Link className="link" to="/askQuestions">Ask Questions</Link></button>
           </div>
         </div>
         {/* Top Questions Header End*/}
@@ -68,13 +68,14 @@ function QuestionList(props) {
 
            <div className="col-8">modified {data.modifyTime} min ago</div>
          </div>
-         <div className="row  mt-2  ">
+         <div className="row  mt-2 mb-2  ">
            <div className="col-2">{data.numOfViews} views</div>
          </div>
        </div>
         )}
-        <div className="text-light">
-          {props.data.map((data)=>{<div>{data.numOfAnswers}</div>})}
+        <div className="text-light  ">
+          {/*props.data.map((data)=>{<div>{data.numOfAnswers}</div>}) */}
+          
         </div>
        
       </div>

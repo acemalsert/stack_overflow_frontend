@@ -1,11 +1,37 @@
 import React, {useState} from 'react';
 import "./askquestion.css"
+import { Link } from "react-router-dom"
 
-function Askquestion() {
+function Askquestion(props) {
 
-  const [title,setTitle] = useState([])
+    const [title,setTitle] = useState("")
+    const [text,setText] = useState("")
+    const [tag,setTag] = useState("")
+
+    const handleSubmit= () => {
+    console.log("title is" + title)
+    console.log("text is" + text)
+    console.log("tag is" + tag)
+    } 
+
+
+
   return <div className='ask-question bg-dark'>
+
+<div className="row navbar-section">
+           {/*Navbar Start */}
+     
+       <div className="col-2 ">
+       <a href = "" className = "logo "> <Link className='link' to= "/topQuestions"><i className="fab fa-stack-overflow"></i>Stack <b>overflow</b></Link></a>
+       </div>
+        
+         
+          
+     
+       {/*Navbar End */}
+        </div>
       <div className='container bg-dark pt-3 '>
+      
         
             <div className='row text-light  m-3 '>
            <p>
@@ -15,7 +41,7 @@ function Askquestion() {
             </div>
             <div className='row   m-3 '>
             <form> 
-                <input className='input-box bg-dark text-light' type="text" placeholder='e.g Is there an R funtion for finding the index of an element in a vector?'>
+                <input className='input-box bg-dark text-light' type="text" placeholder='e.g Is there an R funtion for finding the index of an element in a vector?' onChange={(event)=>setTitle(event.target.value)}>
                 </input>
             </form>  
             </div>
@@ -27,7 +53,7 @@ function Askquestion() {
             </div>
             <div className='row  m-3'>
             <form>
-                <input className='input-box-body bg-dark text-light' type="text">
+                <input className='input-box-body bg-dark text-light' type="text" onChange={(event)=>setText(event.target.value)}>
                 </input>
             </form>  
             </div>
@@ -40,13 +66,13 @@ function Askquestion() {
 
             <div className='row  m-3'>
             <form>
-                <input className='input-box row bg-dark text-light ml-1' type="text" placeholder='e.g typescript laravel mysql'>
+                <input className='input-box row bg-dark text-light ml-1' type="text" placeholder='e.g typescript laravel mysql'onChange={(event)=>setTag(event.target.value)} >
                 </input>
             </form>  
             </div>
 
             <div className='row   pb-3'>
-                <button className='ask-button'>Send Question </button>
+                <button className='ask-button' onClick = {handleSubmit}>Send Question </button>
             </div>
           </div>
 
