@@ -12,7 +12,7 @@ function InduvidualQuestion() {
   
 
       <div className='container bg-dark text-light  pt-4'>
-        
+        asd
             <h1>{fakeQuestion.question_title}</h1>
             <hr/>
           <div className='row text-light pb-4 pl-2'>
