@@ -1,11 +1,74 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import {Link} from "react-router-dom"
+import axios from 'axios';
+import { useParams } from 'react-router'
 
 
 function InduvidualQuestion() {
 
-    const fakeQuestion = {question_title:"javascript arrays",question:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."}
-    const fakeComments = [{ answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},{ answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},{ answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."}]
+  const [question,setQuestion] = useState("")
+  const [comment,setComment] = useState([])
+  const [newComment,setNewComment] = useState("")
+  const {id} = useParams()
+  const {FKquestionid} = useParams()
+
+  const individualQuestions = async()=>{
+    try {
+        const res = await axios.get(`https://localhost:44362/api/Questions/${id}`)
+        console.log(res.data)
+        setQuestion(res.data)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const comments = async()=>{
+  try {
+      const res = await axios.get(`https://localhost:44362/api/Comments`)
+      console.log(res.data)
+      setComment(res.data)
+  } catch (error) {
+      console.log(error)
+  }
+  
+}  
+
+const neededComments = async () => {
+  comments()
+
+  comment.forEach(comment => {
+    if(comment.FKquestionid == question.id) {
+      return comment;
+    }
+  });
+  
+}
+
+const handleSubmit = (event)=>{
+  event.preventDefault()
+  const generateNewComment= async(newComment,FKquestionid)=>{
+      try {
+          const res = await axios.post('https://localhost:44362/api/Comments',{
+              newComment,
+              FKquestionid
+          })
+          console.log(res.data)
+          
+      } catch (error) {
+          console.log(error)
+      }
+  }
+  generateNewComment(newComment,FKquestionid)
+
+}
+
+
+useEffect(()=>{
+    individualQuestions()
+    neededComments()
+    
+},[])
+   
   return <div className='induvidual-questions bg-dark'>
    
    <div className="row navbar-section">
@@ -25,21 +88,21 @@ function InduvidualQuestion() {
   
 
       <div className='container bg-dark text-light  pt-4'>
-            <h1>{fakeQuestion.question_title}</h1>
-            <hr/>
+            <h1>{question.title}</h1>
+         
           <div className='row text-light pb-4 pl-2'>
-              {fakeQuestion.question}
+              {question.text}
           </div>
             <div className='row pl-2'><p>
               Know someone who can answer? Share a link to this question via email, Twitter, or Facebook.
               </p></div>
            
-              {fakeComments.map((comment)=>(
+              {comment.map((comment)=>(
                <div className='comment'>
 
                  <hr/>
                  <h3>Answer</h3>
-                 {comment.answer}
+                 {comment.commentText}
                  <hr/>
                </div>
               
@@ -52,7 +115,7 @@ function InduvidualQuestion() {
               
               <div className='row mt-3 pl-4  '>
             <form>
-                <input className='input-box-body bg-dark' type="text">
+                <input className='input-box-body bg-dark' type="text" onChange={(event)=>setNewComment(event.target.value)}>
                 </input>
             </form>  
             </div>
@@ -61,7 +124,7 @@ function InduvidualQuestion() {
           </div>
 
           <div className='row  pb-3 pl-2'>
-                <button className='ask-button'>Send Answer </button>
+                <button className='ask-button' onClick={handleSubmit}>Send Answer </button>
             </div>
       </div>
   </div>;

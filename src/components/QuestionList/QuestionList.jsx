@@ -1,12 +1,30 @@
-import React, {useState} from "react";
-
+import React, {useState,useEffect} from "react";
 import { Link } from "react-router-dom"
 import "./questionList.css"
+import axios from "axios";
 
-function QuestionList(props) {
+function QuestionList() {
+
+
   
-
+  const [questions,setQuestions] = useState([])
   const [searchTerm,setSearchTerm] = useState("")
+
+  const fetchQuestions = async() =>{
+    try{
+        const res = await axios.get('https://localhost:44362/api/Questions')
+        console.log(res.data)
+        setQuestions(res.data)
+    }
+    catch(error){
+        console.log(error)
+    }
+} 
+
+useEffect(() => {
+  fetchQuestions()
+}, []) 
+
 
  
 
@@ -44,39 +62,39 @@ function QuestionList(props) {
         {/* Top Questions Header End*/}
 
         {/*Questions Start Here */}
-        {props.data.filter((data) => {  if(searchTerm == "") {
+        {questions.filter((data) => {  if(searchTerm == "") {
                   return data;
                 }
-              else if (data.questionLink.toLowerCase().includes(searchTerm.toLowerCase())){
+              else if (data.title.toLowerCase().includes(searchTerm.toLowerCase())){
                   return data;
               }} ).map((data) => 
-         <div className="container question-section bg-dark text-light">
+         <div className="container question-section bg-dark text-light" key = {data.id}>
          <div className="row mb-2 mt-2 pt-2 ">
-           <div className="col-2">{data.numOfVotes} votes</div>
+           <div className="col-2"> votes</div>
            <div className="col-10 question-link">
-            <Link to = "/question">{data.questionLink}</Link>
+            <Link to = "/question/:id">{data.title}</Link>
            </div>
          </div>
 
          <div className="row ">
-           <div className="col-2 ">{data.numOfAnswers} answers</div>
+           <div className="col-2 "> answers</div>
 
            <div className="col-1">
-             <div>{data.Tags}</div>
+             <div>{data.tag}</div>
            </div>
            
 
-           <div className="col-8">modified {data.modifyTime} min ago</div>
+           <div className="col-8">modified {data.time} min ago</div>
          </div>
          <div className="row  mt-2 mb-2  ">
-           <div className="col-2">{data.numOfViews} views</div>
+           <div className="col-2"> views</div>
          </div>
        </div>
-        )}
-        <div className="text-light  ">
-          {/*props.data.map((data)=>{<div>{data.numOfAnswers}</div>}) */}
-          
-        </div>
+        )} 
+        
+
+      
+       
        
       </div>
 

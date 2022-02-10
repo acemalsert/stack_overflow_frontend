@@ -1,18 +1,38 @@
 import React, {useState} from 'react';
 import "./askquestion.css"
 import { Link } from "react-router-dom"
+import axios from 'axios';
 
-function Askquestion(props) {
+function Askquestion() {
+
+
 
     const [title,setTitle] = useState("")
     const [text,setText] = useState("")
     const [tag,setTag] = useState("")
 
-    const handleSubmit= () => {
-    console.log("title is" + title)
-    console.log("text is" + text)
-    console.log("tag is" + tag)
-    } 
+
+    const handleSubmit = (event)=>{
+        event.preventDefault()
+        const sendQuestion= async(title,text,tag)=>{
+            try {
+                const res = await axios.post('https://localhost:44362/api/Questions',{
+                    title:title,
+                    text:text,
+                    tag:tag,
+                    
+                })
+                console.log(res.data)
+                
+            } catch (error) {
+                console.log(error)
+            }
+            window.location.replace('/topQuestions')
+        }
+        sendQuestion(title,text,tag)
+        console.log(title,text,tag)
+
+    }
 
 
 
