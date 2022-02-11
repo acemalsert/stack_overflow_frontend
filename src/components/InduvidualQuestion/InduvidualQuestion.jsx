@@ -1,31 +1,38 @@
 import React,{useEffect,useState} from 'react';
 import {Link} from "react-router-dom"
 import axios from 'axios';
-import { useParams } from 'react-router'
+import { useParams } from 'react-router-dom'
 
 
 function InduvidualQuestion() {
 
+  //const [input,setInput] = useState("")
   const [question,setQuestion] = useState("")
   const [comment,setComment] = useState([])
   const [newComment,setNewComment] = useState("")
+  const [FKquestionid,setFKquestionid] = useState("")
   const {id} = useParams()
-  const {FKquestionid} = useParams()
+  const [questionID,setQuestionID] = useState("")
+  
+  
+  
 
   const individualQuestions = async()=>{
     try {
         const res = await axios.get(`https://localhost:44362/api/Questions/${id}`)
-        console.log(res.data)
         setQuestion(res.data)
+        setFKquestionid(id)
+        
     } catch (error) {
         console.log(error)
     }
 }
 
+
 const comments = async()=>{
   try {
       const res = await axios.get(`https://localhost:44362/api/Comments`)
-      console.log(res.data)
+      //console.log(res.data)
       setComment(res.data)
   } catch (error) {
       console.log(error)
@@ -33,41 +40,35 @@ const comments = async()=>{
   
 }  
 
-const neededComments = async () => {
-  comments()
 
-  comment.forEach(comment => {
-    if(comment.FKquestionid == question.id) {
-      return comment;
-    }
-  });
-  
-}
 
 const handleSubmit = (event)=>{
   event.preventDefault()
   const generateNewComment= async(newComment,FKquestionid)=>{
+      
       try {
           const res = await axios.post('https://localhost:44362/api/Comments',{
-              newComment,
-              FKquestionid
+              commentText:newComment,
+              FKquestionid:FKquestionid
           })
           console.log(res.data)
           
       } catch (error) {
           console.log(error)
       }
+
   }
   generateNewComment(newComment,FKquestionid)
+
 
 }
 
 
 useEffect(()=>{
     individualQuestions()
-    neededComments()
+    comments()
     
-},[])
+},[comment])
    
   return <div className='induvidual-questions bg-dark'>
    
@@ -75,7 +76,7 @@ useEffect(()=>{
            {/*Navbar Start */}
      
        <div className="col-2 ">
-       <a href = "" className = "logo "> <Link className='link' to= "/topQuestions"><i class="fab fa-stack-overflow"></i>Stack <b>overflow</b></Link></a>
+       <a href = "" className = "logo "> <Link className='link' to= "/"><i class="fab fa-stack-overflow"></i>Stack <b>overflow</b></Link></a>
        </div>
        
          
@@ -96,13 +97,22 @@ useEffect(()=>{
             <div className='row pl-2'><p>
               Know someone who can answer? Share a link to this question via email, Twitter, or Facebook.
               </p></div>
-           
-              {comment.map((comment)=>(
-               <div className='comment'>
+              
+              {
+              comment.filter((comm)=>{
+               
+                 if(comm.FKquestionId == id){ 
+                  
+                   
+                    return comm;
+                }
+                
+                }).map((comm)=>(
+               <div className='comment' key={comm.id}>
 
                  <hr/>
                  <h3>Answer</h3>
-                 {comment.commentText}
+                 {comm.commentText} 
                  <hr/>
                </div>
               
@@ -115,7 +125,7 @@ useEffect(()=>{
               
               <div className='row mt-3 pl-4  '>
             <form>
-                <input className='input-box-body bg-dark' type="text" onChange={(event)=>setNewComment(event.target.value)}>
+                <input className='input-box-body bg-dark text-light' type="text" onChange={(event)=>setNewComment(event.target.value)}>
                 </input>
             </form>  
             </div>

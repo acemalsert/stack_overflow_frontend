@@ -29,7 +29,7 @@ function App() {
    
     <Switch>
 
-<Route path="/topQuestions">
+<Route exact path="/">
     <QuestionList data = {fakeDatas}/>
     </Route>
     
@@ -42,7 +42,7 @@ function App() {
       </Route>     
      
      
-     <Redirect to="/topQuestions "/>
+     <Redirect to="/"/>
      </Switch>
      
     </div>
