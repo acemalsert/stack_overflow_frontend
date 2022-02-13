@@ -27,7 +27,7 @@ function Askquestion() {
             } catch (error) {
                 console.log(error)
             }
-            window.location.replace('/topQuestions')
+            window.location.replace('/')
         }
         sendQuestion(title,text,tag)
         console.log(title,text,tag)
