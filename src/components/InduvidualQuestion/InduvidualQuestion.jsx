@@ -12,14 +12,11 @@ function InduvidualQuestion() {
   const [newComment,setNewComment] = useState("")
   const [FKquestionid,setFKquestionid] = useState("")
   const {id} = useParams()
-  const [questionID,setQuestionID] = useState("")
-  
-  
   
 
   const individualQuestions = async()=>{
     try {
-        const res = await axios.get(`https://localhost:44362/api/Questions/${id}`)
+        const res = await axios.get(`https://webapplication420220213220336.azurewebsites.net//api/Questions/${id}`)
         setQuestion(res.data)
         setFKquestionid(id)
         
@@ -31,7 +28,7 @@ function InduvidualQuestion() {
 
 const comments = async()=>{
   try {
-      const res = await axios.get(`https://localhost:44362/api/Comments`)
+      const res = await axios.get(`https://webapplication420220213220336.azurewebsites.net//api/Comments`)
       //console.log(res.data)
       setComment(res.data)
   } catch (error) {

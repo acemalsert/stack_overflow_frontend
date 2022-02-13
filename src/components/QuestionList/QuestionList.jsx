@@ -14,7 +14,7 @@ function QuestionList() {
 
   const fetchQuestions = async() =>{
     try{
-        const res = await axios.get('https://localhost:44362/api/Questions')
+        const res = await axios.get('https://webapplication420220213220336.azurewebsites.net/api/Questions')
         console.log(res.data)
         setQuestions(res.data)
     }

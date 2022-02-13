@@ -16,7 +16,7 @@ function Askquestion() {
         event.preventDefault()
         const sendQuestion= async(title,text,tag)=>{
             try {
-                const res = await axios.post('https://localhost:44362/api/Questions',{
+                const res = await axios.post('https://webapplication420220213220336.azurewebsites.net/api/Questions',{
                     title:title,
                     text:text,
                     tag:tag,
