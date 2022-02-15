@@ -16,7 +16,7 @@ function InduvidualQuestion() {
 
   const individualQuestions = async()=>{
     try {
-        const res = await axios.get(`https://webapplication420220213220336.azurewebsites.net/api/Questions/${id}`)
+        const res = await axios.get(`https://localhost:44362/api/Questions/${id}`)
         setQuestion(res.data)
         setFKquestionid(id)
         
@@ -28,7 +28,7 @@ function InduvidualQuestion() {
 
 const comments = async()=>{
   try {
-      const res = await axios.get(`https://webapplication420220213220336.azurewebsites.net/api/Comments`)
+      const res = await axios.get(`https://localhost:44362/api/Comments`)
       //console.log(res.data)
       setComment(res.data)
   } catch (error) {
@@ -44,7 +44,7 @@ const handleSubmit = (event)=>{
   const generateNewComment= async(newComment,FKquestionid)=>{
       
       try {
-          const res = await axios.post('https://webapplication420220213220336.azurewebsites.net/api/Comments',{
+          const res = await axios.post('https://localhost:44362/api/Comments',{
               commentText:newComment,
               FKquestionid:FKquestionid
           })
